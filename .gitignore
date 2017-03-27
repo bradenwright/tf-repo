@@ -1,0 +1,7 @@
+.kitchen
+providers/*
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/*
+*.swp

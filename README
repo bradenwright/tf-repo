@@ -1,0 +1,17 @@
+Install Go and Setup paths:
+
+
+Build terraform-provider-lxd:
+
+go build -o terraform-provider-lxd
+
+Then copied bin file to terraform home dir /opt/terraform
+
+cp terraform-provider-lxd /opt/terraform
+
+
+TODO:
+setup dns.domain in lxd, currently was set via `lxc network lxdbr0` command
+setup netowrk/profile via tf-lxd
+setup ssl, preferably with CA
+upload cookbooks chef server (in chef recipe, or via local-exec command, etc.)
