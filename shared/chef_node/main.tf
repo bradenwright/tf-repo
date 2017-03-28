@@ -8,16 +8,18 @@ data "terraform_remote_state" "chef_server" {
   }
 }
 
+#  name      = "${replace(var.recipe,"_","-")}-${count.index}"
+#    node_name       = "${replace(var.recipe,"_","-")}-${count.index}"
 resource "lxd_container" "chef_node" {
   count     = "${var.node_count}"
-  name      = "${replace(var.recipe,"_","-")}-${count.index}"
+  name      = "${replace(replace(var.recipe,"bb_",""),"_","-")}-${count.index}"
   image     = "${var.recipe}-ubuntu-14.04-static-ip"
   ephemeral = false
   profiles  = ["default"]
   provisioner "chef" {
     environment     = "_default"
     run_list        = [  ]
-    node_name       = "${replace(var.recipe,"_","-")}-${count.index}"
+    node_name       = "${replace(replace(var.recipe,"bb_",""),"_","-")}-${count.index}"
     server_url      = "https://${data.terraform_remote_state.chef_server.ip_address}/organizations/bb"
     recreate_client = true
     user_name       = "braden"
