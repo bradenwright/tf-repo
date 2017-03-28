@@ -22,10 +22,10 @@ resource "lxd_container" "bb_base" {
     skip_install = true
   }
   provisioner "local-exec" {
-    command = "knife node run_list add ${self.name} recipe[bb_base]"
+    command = "lxc exec chef-server -- su - braden -c 'knife node run_list add ${self.name} recipe[bb_base] && sleep 3'"
   }
   provisioner "local-exec" {
-    command = "knife vault refresh bb_users braden --clean --mode client"
+    command = "lxc exec chef-server -- su - braden -c 'knife vault refresh bb_users braden --clean --mode client'"
   }
   provisioner "remote-exec" {
     inline = [ "chef-client" ]
