@@ -1,6 +1,6 @@
 .kitchen
-providers/*
+providers/
 *.tfstate*
-.terraform/*
+.terraform/
 *.swp
 crash.log
